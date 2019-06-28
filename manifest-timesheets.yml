@@ -2,11 +2,13 @@ applications:
 - name: tracker-timesheets
   path: ./applications/timesheets-server/build/libs/timesheets-server.jar
   routes:
-  - route: timesheets-pal-saumya.apps.dev.pcf-aws.com
-  memory: 1G
+  - route: timesheets-pal-saumya2.cfapps.io
+  memory: 500M
+  disk_quota: 500M
   instances: 1
   env:
-    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
-  services:
-  - tracker-timesheets-database
-  - tracker-service-registry
+      - JAVA_OPTS: '-XX:MaxMetaspaceSize=80780K -Xss512k -Xmx200M -XX:ReservedCodeCacheSize=16M -XX:MaxDirectMemorySize=16M'
+      - JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
+  #services:
+  #- tracker-timesheets-database
+  #- tracker-service-registry
